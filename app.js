@@ -1,20 +1,23 @@
 var uiController = (function() {
-    // var x=100;
-
-    // function add(y) {
-    //     return x+y;
-    // }
-
-    // return {
-    //     publicAdd: function(a) {
-    //         a = add(a);
-    //         console.log('performed values is: '+ a);
-    //     }
-    // };
-
-
-
-
+    var DOMStrings = {
+        inputType: '.add__type',
+        inputDesc: '.add__description',
+        inputValue:'.add__value',
+        addBtn: '.add__btn'
+    }
+    
+    return {
+        getInput: function() {
+            return {
+                type: document.querySelector(DOMStrings.inputType).value,
+                description: document.querySelector(DOMStrings.inputDesc).value,
+                value: document.querySelector(DOMStrings.inputValue).value
+            };
+        },
+        getDOMStrings: function() {
+            return DOMStrings;
+        }
+    };
 })();
 
 var financeController = (function() {
@@ -22,24 +25,14 @@ var financeController = (function() {
 })();
 
 var appController = (function(ui,fin) {
-    // ui.publicAdd(10);
+    var DOM = ui.getDOMStrings();
 
     var addExpense = function() {
-        var expense = document.querySelector('.add__description').value;
-        var valueExpense = document.querySelector('.add__value').value;
-       
-        if(expense == "" || valueExpense =="") {
-            alert("Please enter values");
-            
-        }
-        else {
-            if(valueExpense <=0) alert("Please enter correct input");
-            else document.querySelector('.income__list').innerHTML += '<li>'+ expense +' - '+valueExpense +'</li>';
-        }
+        console.log(ui.getInput());
 
     }
 
-    document.querySelector('.add__btn').addEventListener('click', function() {
+    document.querySelector(DOM.addBtn).addEventListener('click', function() {
         addExpense();
     })
 
